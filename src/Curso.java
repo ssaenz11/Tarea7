@@ -70,7 +70,7 @@ public class Curso
 
 		Dia dia = (Dia) ordenDeMayorAsistencia.get(0);
 
-		
+		int restante = numPersonas- dia.getCantidadAsistencia();
 		
 			int cantidad =1;
 
@@ -84,7 +84,7 @@ public class Curso
 
 				if(conjuntoDiasOfrecidos[numeroDia]!= false) 
 				{
-					int restante = numPersonas- dia.getCantidadAsistencia();
+					
 					
 					System.out.println("restantes"+restante);
 
@@ -194,7 +194,7 @@ public class Curso
 	public void setNumPersonas(int numPersonas) {
 		this.numPersonas = numPersonas;
 	}
-
+ 
 
 
 
