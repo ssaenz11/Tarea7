@@ -44,7 +44,7 @@ public class Curso
 			for(int j = 0; j<getNumPersonas(); j++)
 			{
 
-				if(conjuntoPersonasDias[j][i]== true) n++; System.out.println(n+"entro");
+				if(conjuntoPersonasDias[j][i]== true) n++; 
 			}
 			Dia dia = new Dia(i,n);
 			ordenDeMayorAsistencia.add(dia);
@@ -66,49 +66,48 @@ public class Curso
 
 	public int buscarDiasRestantes(ArrayList list)
 	{
-//		Dia dia0 = (Dia) ordenDeMayorAsistencia.get(0);
+		//		Dia dia0 = (Dia) ordenDeMayorAsistencia.get(0);
 
 		Dia dia = (Dia) ordenDeMayorAsistencia.get(0);
 
 		int restante = numPersonas- dia.getCantidadAsistencia();
-		
-			int cantidad =1;
 
-			for(int i = 1; i< ordenDeMayorAsistencia.size(); i++)
-			{
-				Dia dia1 = (Dia) ordenDeMayorAsistencia.get(i);
+		int cantidad =1;
 
-				int numeroDia = dia1.getDia();
+		for(int i = 1; i< ordenDeMayorAsistencia.size(); i++)
+		{
+			Dia dia1 = (Dia) ordenDeMayorAsistencia.get(i);
+
+			int numeroDia = dia1.getDia();
 
 
 
-				if(conjuntoDiasOfrecidos[numeroDia]!= false) 
+			//if(conjuntoDiasOfrecidos[numeroDia]!= false) 
+			//{
+
+				if(restante == 0)
 				{
-					
-					
-					System.out.println("restantes"+restante);
+					// luego se sumará el 1
+					return 0;
+				}
 
-					if(restante == 0)
+				for(int j = 0; j<list.size(); j++)
+				{
+					int x = (int) list.get(j);
+					if(conjuntoPersonasDias[x][numeroDia]== true)
 					{
-						return 1;
+						restante--;
+						list.remove(j);
 					}
 
-					for(int j = 0; j<list.size(); j++)
-					{
-						int x = (int) list.get(j);
-						if(conjuntoPersonasDias[x][numeroDia]== true)
-						{
-							restante--;
-							list.remove(j);
-						}
-
-						if(restante == 0) return cantidad++;
-
-					}
+					if(restante == 0) { return cantidad++;}
 
 				}
-			}
-		
+
+			//}
+		}
+		if(restante >0) return -1;
+
 		return minDiasADictar;
 	}
 
@@ -194,7 +193,7 @@ public class Curso
 	public void setNumPersonas(int numPersonas) {
 		this.numPersonas = numPersonas;
 	}
- 
+
 
 
 
@@ -259,15 +258,44 @@ public class Curso
 			}		
 		}
 
-		//		for(int i = 0; i<source; i++)
-		//		{
-		//			for (int j = 0; j< source1; j++)
-		//			{
-		//				System.out.println(j+" "+ curso.getConjuntoPersonasDias()[j][i]+" "+ i);
-		//			}		
-		//		}
+		System.out.println("-----------------------");
+		System.out.println("A Continuación se presentan los días ofrecidos( si es true se ofrece de lo contrario no)");
+		System.out.println("-----------------------");
+		System.out.print("  ");
+		
+		int z =curso.conjuntoDiasOfrecidos.length;
+		for(int i = z-1; 0<=i; i--)
+		{
+			System.out.print(curso.conjuntoDiasOfrecidos[i]+ " ");
+		}
 
-		System.out.println("Se necesita un total de: "+ curso.minDias()+ " días");
+		System.out.println();
+		System.out.println("Ahora se mostrará los estidiantes (que son los números verticales y su disponibilidad en el día. EL DÍA ES EL EJE X)");
+
+		for(int i = 0; i<source1; i++)
+		{
+			System.out.print( "   "+i+"  ");
+		}
+		
+		System.out.println();
+		
+		for(int i = 0; i<source; i++)
+		{
+			System.out.print(i+" ");
+			for (int j = 0; j< source1; j++)
+			{
+				System.out.print( curso.getConjuntoPersonasDias()[i][j]+ " ");
+			}	
+			System.out.println("");
+		}
+		
+		
+		
+		
+		
+		int mind = curso.minDias()+1;
+
+		System.out.println("Se necesita un total de: "+ mind+ " días");
 
 	}
 
